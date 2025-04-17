@@ -1,0 +1,48 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class EcomLoginAutomation {
+    public static void main(String[] args) {
+        // Set the path to your ChromeDriver executable
+        System.setProperty("webdriver.chrome.driver", "C:\\path\\to\\chromedriver.exe");
+
+        // Initialize WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Open the login page
+            driver.get("file:///C:/path/to/your/index.html");  // apna local HTML file ka path daalna
+
+            // Maximize window
+            driver.manage().window().maximize();
+
+            // Find email field and enter email
+            WebElement emailField = driver.findElement(By.id("email"));
+            emailField.sendKeys("test@example.com");
+
+            // Find password field and enter password
+            WebElement passwordField = driver.findElement(By.id("password"));
+            passwordField.sendKeys("123456");
+
+            // Click on login button
+            WebElement loginButton = driver.findElement(By.tagName("button"));
+            loginButton.click();
+
+            // Wait a little to see the alert
+            Thread.sleep(2000);
+
+            // Accept the alert
+            driver.switchTo().alert().accept();
+
+            System.out.println("Login test completed successfully!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Close the browser
+            driver.quit();
+        }
+    }
+}
